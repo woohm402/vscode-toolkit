@@ -3,9 +3,7 @@ export const cssTemplate = () => `.wrapper {
 }
 `;
 
-export const componentTemplate = (
-  componentName: string
-) => `import styles from './index.module.css';
+export const componentTemplate = (componentName: string) => `import styles from './index.module.css';
 
 export const ${componentName} = ({
 
