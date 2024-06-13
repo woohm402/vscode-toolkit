@@ -26,7 +26,7 @@
     ]
   },
   "scripts": {
-    "deploy": "vsce package && vsce publish",
+    "deploy": "vsce publish --yarn",
     "vscode:prepublish": "yarn run package",
     "compile": "yarn run check-types && yarn run lint && node esbuild.js",
     "watch": "npm-run-all -p watch:*",
