@@ -2,7 +2,7 @@
   "name": "woohm402-vscode-toolkit",
   "displayName": "woohm402-vscode-toolkit",
   "description": "woohm402's vscode toolkit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -20,10 +20,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-toolkit.helloWorld",
-        "title": "Hello World"
+        "command": "createComponent",
+        "title": "New React Component"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "createComponent",
+          "group": "navigation",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    }
   },
   "scripts": {
     "deploy": "vsce publish --yarn",
