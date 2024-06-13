@@ -14,4 +14,5 @@ jobs:
         with:
           node-version: 18.x
       - run: yarn
+      - run: yarn lint
       - run: xvfb-run -a yarn test
