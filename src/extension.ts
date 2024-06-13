@@ -1,25 +1,49 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+import * as fs from "fs";
+import * as path from "path";
+
+import { componentTemplate, cssTemplate } from "./templates";
+
 export function activate(context: vscode.ExtensionContext) {
+  let disposable = vscode.commands.registerCommand(
+    "createComponent",
+    async (uri) => {
+      const fp = uri.fsPath;
+      const componentName = await vscode.window.showInputBox({
+        placeHolder: "Enter Component Name",
+        validateInput: (value: string) => {
+          if (!value) {
+            return "Component Name Can't be Empty!";
+          }
+          return undefined;
+        },
+      });
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-toolkit" is now active!');
+      if (componentName) {
+        const componentPath = path.join(fp, componentName);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('vscode-toolkit.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from vscode-toolkit!');
-	});
+        if (!fs.existsSync(componentPath)) {
+          fs.mkdirSync(componentPath);
 
-	context.subscriptions.push(disposable);
+          fs.writeFileSync(
+            path.join(componentPath, "index.tsx"),
+            componentTemplate(componentName)
+          );
+          fs.writeFileSync(
+            path.join(componentPath, "index.module.css"),
+            cssTemplate()
+          );
+
+          vscode.window.showInformationMessage(`Component Created!`);
+        } else {
+          vscode.window.showInformationMessage(`Component already Exist`);
+        }
+      }
+    }
+  );
+
+  context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
