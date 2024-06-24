@@ -14,7 +14,7 @@ export const ${componentName} = ({
 }: {
   props: Parameters<typeof ${getPresenterName(componentName)}.useViewModel>[0];
 }) => {
-  const viewModel = ${getPresenterName(componentName)}.useViewModel({});
+  const viewModel = ${getPresenterName(componentName)}.useViewModel(props);
 
   return (
     <div className={styles.wrapper}>
