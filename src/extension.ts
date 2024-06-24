@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { componentTemplate, cssTemplate } from './templates';
+import { componentTemplate, cssTemplate, presenterTemplate } from './templates';
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand('createComponent', async (uri) => {
@@ -25,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         fs.writeFileSync(path.join(componentPath, 'index.tsx'), componentTemplate(componentName));
         fs.writeFileSync(path.join(componentPath, 'index.module.css'), cssTemplate());
+        fs.writeFileSync(path.join(componentPath, 'index.presenter.ts'), presenterTemplate(componentName));
 
         vscode.window.showInformationMessage(`Component Created!`);
       } else {
