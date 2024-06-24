@@ -5,7 +5,7 @@ export const cssTemplate = () => `.wrapper {
 
 export const componentTemplate = (
   componentName: string,
-) => `import { ${getPresenterName(componentName)} } from './index.presenter.ts';
+) => `import { ${getPresenterName(componentName)} } from './index.presenter';
 
 import styles from './index.module.css';
 
