@@ -4,5 +4,5 @@ export default [
   {
     ignores: ['esbuild.js', 'out', 'dist', 'node_modules', '.vscode-test'],
   },
-  ...config,
+  ...config(),
 ];
